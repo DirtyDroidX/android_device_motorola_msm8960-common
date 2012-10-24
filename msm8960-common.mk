@@ -15,8 +15,8 @@ DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/audio/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
     $(COMMON_FOLDER)/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
-    $(COMMON_FOLDER)/audio/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm_2x_Fusion3 \
-    $(COMMON_FOLDER)/audio/snd_soc_msm_Sitar:system/etc/snd_soc_msm_Sitar \
+    $(COMMON_FOLDER)/audio/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
+    $(COMMON_FOLDER)/audio/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \
     $(COMMON_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # EGL config
