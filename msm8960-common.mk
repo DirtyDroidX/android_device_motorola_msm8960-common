@@ -115,7 +115,7 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.qcom.syspart_fixup.sh \
     init.qcom.usb.sh \
-    init.rc
+    init.rc \
     init.target.rc \
     init.vzw.rc \
     ueventd.qcom.rc \
