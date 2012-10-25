@@ -18,19 +18,17 @@ TARGET_BOARD_PLATFORM := msm8960
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 
 # Kernel
-#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
-#TARGET_KERNEL_SOURCE        := kernel/motorola/msm8960-common
-#TARGET_KERNEL_CONFIG        := msm8960_mmi_defconfig
-BOARD_KERNEL_CMDLINE        := oops=panic console=null androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3F ehci-hcd.park=3 vmalloc=400M kgsl.mmutype=gpummu androidboot.emmc=true androidboot.serialno=TA71005WTL androidboot.baseband=msm androidboot.mode=normal androidboot.bootloader=0x109B battery= mot_sst=0 androidboot.carrier=vzw
+TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
+TARGET_KERNEL_SOURCE        := kernel/motorola/msm8960-common
+TARGET_KERNEL_CONFIG        := msm8960_mmi_motorola_defconfig
+BOARD_KERNEL_CMDLINE        := console=/dev/null androidboot.hardware=qcom user_debug=31 loglevel=1 msm_rtb.filter=0x3F kgsl.mmutype=gpumm
 BOARD_KERNEL_BASE           := 0x80200000
-BOARD_FORCE_RAMDISK_ADDRESS := 0x81600000
 BOARD_KERNEL_PAGESIZE       := 2048
 
 TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x105c0000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x105c0000
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 4294967296
+BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00A00000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1560281088
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Wifi
