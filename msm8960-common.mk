@@ -105,30 +105,32 @@ PRODUCT_COPY_FILES += \
 # Init scripts and ramdisk
 PRODUCT_PACKAGES += \
     fstab.qcom \
-    init.ath3k.bt.sh \
     init.mmi.usb.rc \
     init.mmi.usb.sh \
     init.msm.rc \
-    init.qcom.bt.sh \
     init.qcom.class_core.sh \
     init.qcom.class_main.sh \
-    init.qcom.coex.sh \
     init.qcom.early_boot.sh \
+    init.qcom.rc \
+    init.qcom.sh \
+    init.qcom.syspart_fixup.sh \
+    init.qcom.usb.sh \
+    init.rc
+    init.target.rc \
+    init.vzw.rc \
+    ueventd.qcom.rc \
+    ueventd.rc \
+    init.ath3k.bt.sh \
+    init.qcom.bt.sh \
+    init.qcom.coex.sh \
     init.qcom.efs.sync.sh \
     init.qcom.fm.sh \
     init.qcom.mdm_links.sh \
     init.qcom.modem_links.sh \
     init.qcom.post_boot.sh \
-    init.qcom.rc \
     init.qcom.sdio.sh \
-    init.qcom.sh \
-    init.qcom.syspart_fixup.sh \
     init.qcom.thermald_conf.sh \
-    init.qcom.usb.sh \
-    init.qcom.wifi.sh \
-    init.target.rc \
-    init.vzw.rc \
-    ueventd.qcom.rc
+    init.qcom.wifi.sh
 
 # Torch
 PRODUCT_PACKAGES += Torch
@@ -200,7 +202,7 @@ PRODUCT_COPY_FILES += \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=mtp,adb
+    persist.sys.usb.config=mtp
 
 # Increase the HWUI font cache since we have tons of RAM
 PRODUCT_PROPERTY_OVERRIDES += \
