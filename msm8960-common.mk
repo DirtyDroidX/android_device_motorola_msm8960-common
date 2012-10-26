@@ -25,8 +25,8 @@ PRODUCT_COPY_FILES += \
 
 # Media config
 PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml
+#    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -49,7 +49,7 @@ PRODUCT_PACKAGES += \
 #	gps.msm8960
 
 # Lights
-PRODUCT_PACKAGES += lights.msm8960
+#PRODUCT_PACKAGES += lights.msm8960
 
 # NFC Support
 PRODUCT_PACKAGES += \
