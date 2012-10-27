@@ -11,6 +11,9 @@ $(call inherit-product-if-exists, vendor/motorola/msm8960-common/msm8960-common-
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay
 
+# use stock init file for now
+PRODUCT_COPY_FILES += device/motorola/msm8960-common/init:root/init
+
 # Audio configuration
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/audio/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
