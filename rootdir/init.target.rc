@@ -36,6 +36,7 @@ on early-init
     export ANDROID_PRINTF_LOG threadtime
     mkdir /storage/sdcard1 0000 system system
     symlink /storage/sdcard1 /mnt/external1
+    symlink /storage/sdcard1 /external_sd
     # Create PDS mount point
     mkdir /pds 0755 root root
 
