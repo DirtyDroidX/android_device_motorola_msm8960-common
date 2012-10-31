@@ -216,32 +216,70 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.vendor.extension_library=/system/lib/libqc-opt.so
 
-#common build.props
+# QCOM
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.ril.hsxpa=1 \
-    ro.ril.gprsclass=10 \
+    com.qc.hardware=true
+
+# Radio and Telephony
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/system/lib/libril-qc-qmi-1.so \
+    ril.subscription.types=NV,RUIM \
+    DEVICE_PROVISIONED=1 \
+    keyguard.no_require_sim=true \
+    ro.use_data_netmgrd=true \
+    ro.ril.transmitpower=true \
     persist.radio.no_wait_for_card=1 \
     persist.radio.call_type=1 \
     persist.radio.apm_sim_not_pwdn=1 \
     persist.radio.dfr_mode_set=1 \
-    com.qc.hardware=true \
     persist.gps.qmienabled=true \
-    ro.ril.transmitpower=true \
-    ro.opengles.version=131072 \
+    ro.config.vc_call_vol_steps=7 \
+    ro.qc.sdk.camera.facialproc=false \
+    ro.qc.sdk.sensors.gestures=false \
+    persist.timed.enable=true
+
+# QCOM Display
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.egl.hw=1 \
+    debug.enabletr=0 \
+    debug.composition.type=dyn \
+    debug.mdpcomp.maxlayer=3 \
+    debug.mdpcomp.logs=0
+
+# Audio
+PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.mode=endfire \
     persist.audio.vr.enable=false \
     persist.audio.handset.mic=digital \
-    ro.config.vc_call_vol_steps=7 \
     ro.qc.sdk.audio.fluencetype=none \
-    ro.qc.sdk.camera.facialproc=false \
-    ro.qc.sdk.sensors.gestures=false \
-    persist.timed.enable=true \
-    ro.use_data_netmgrd=true \
+    ro.qc.sdk.audio.ssr=false
+
+# Bluetooth
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.bluetooth.hfp.ver=1.6 \
+    ro.qualcomm.bluetooth.sap=true \
+    ro.qualcomm.bt.hci_transport=smd \
+    ro.bluetooth.request.master=true \
+    ro.bluetooth.remote.autoconnect=true
+
+# Media
+PRODUCT_PROPERTY_OVERRIDES += \
     lpa.decode=false \
     lpa.use-stagefright=true \
-    rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    ril.subscription.types=NV,RUIM \
-    ro.telephony.ril.v3=skipnullaid
+    media.stagefright.enable-player=true \
+    media.stagefright.enable-http=true \
+    media.stagefright.enable-aac=true \
+    media.stagefright.enable-qcp=true \
+    media.stagefright.enable-fma2dp=true \
+    media.stagefright.enable-scan=true \
+    mmp.enable.3g2=true \
+    af.resampler.quality=255 \
+    mpq.audio.decode=true
+
+# OpenglES
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=131072   
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
