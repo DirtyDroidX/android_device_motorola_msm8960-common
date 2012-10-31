@@ -26,6 +26,9 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
+target="$1"
+serial="$2"
+
 # No path is set up at this point so we have to do it here.
 PATH=/sbin:/system/sbin:/system/bin:/system/xbin
 export PATH
@@ -59,7 +62,7 @@ fi
 
 # Run wifi script
 if [ -f /system/etc/init.qcom.wifi.sh ]; then
-  /system/bin/sh /system/etc/init.qcom.wifi.sh
+  /system/bin/sh /system/etc/init.qcom.wifi.sh "$target" "$serial"
 fi
 
 # This should be the last command
