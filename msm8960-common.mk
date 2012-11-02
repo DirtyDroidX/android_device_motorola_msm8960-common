@@ -197,9 +197,6 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/keylayout/samsung_remote_ir.kl:system/usr/keylayout/samsung_remote_ir.kl \
     $(COMMON_FOLDER)/keylayout/ue_rf4ce_remote.kl:system/usr/keylayout/ue_rf4ce_remote.kl
 
-# IDC
-PRODUCT_COPY_FILES += $(COMMON_FOLDER)/idc/atmxt-i2c.idc:system/usr/idc/atmxt-i2c.idc
-
 # Vold configuration
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/vold.fstab:system/etc/vold.fstab
