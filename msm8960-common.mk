@@ -11,10 +11,6 @@ $(call inherit-product-if-exists, vendor/motorola/msm8960-common/msm8960-common-
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay
 
-# use stock init file for now
-PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/init:root/init
-
 # Audio configuration
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/audio/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
@@ -32,6 +28,11 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml
 #    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
+# init*rc
+PRODUCT_COPY_FILES += \
+    $(COMMON_FOLDER)/rootdir/init.rc:root/init.rc \
+    $(COMMON_FOLDER)/rootdir/ueventd.rc:root/ueventd.rc \
+
 # Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
@@ -45,6 +46,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     copybit.msm8960 \
     gralloc.msm8960 \
+    hwcomposer.default \
     power.msm8960
 
 #    hwcomposer.msm8960
@@ -119,11 +121,9 @@ PRODUCT_PACKAGES += \
     init.qcom.sh \
     init.qcom.syspart_fixup.sh \
     init.qcom.usb.sh \
-    init.rc \
     init.target.rc \
     init.vzw.rc \
     ueventd.qcom.rc \
-    ueventd.rc \
     init.ath3k.bt.sh \
     init.qcom.bt.sh \
     init.qcom.coex.sh \
@@ -280,6 +280,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # OpenglES
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072   
+
+# # adb has root
+PRODUCT_PROPERTY_OVERRIDES +=persist.sys.root_access=3
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 

@@ -28,18 +28,6 @@
 #
 import init.mmi.usb.rc
 
-on early-init
-    mkdir /firmware 0771 system system
-    symlink /data/tombstones /tombstones
-    mkdir /persist 0771 system system
-    export SECONDARY_STORAGE /storage/sdcard1
-    export ANDROID_PRINTF_LOG threadtime
-    mkdir /storage/sdcard1 0000 system system
-    symlink /storage/sdcard1 /mnt/external1
-    symlink /storage/sdcard1 /external_sd
-    # Create PDS mount point
-    mkdir /pds 0755 root root
-
 on init
     # Configure coredump
     write /proc/sys/kernel/core_pattern "|/system/bin/coredump %e %p %t"
@@ -132,37 +120,6 @@ on property:ro.modem.no_wdog_chk=1
    write /sys/module/modem_8960/parameters/no_wdog_chk 1
 
 on fs
-    # Mount system so that recover_userdata is available
-    wait /dev/block/platform/msm_sdcc.1/by-name/system
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system rw barrier=1
-    # Try to recover/mount userdata in the error case.
-    wait /dev/block/platform/msm_sdcc.1/by-name/userdata
-    exec /system/bin/logwrapper /system/bin/recover_userdata ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data
-    # Mount userdata -- userdata must be in fstab.<ro.hardware> in order to
-    # have functional encryption
-    mount_all fstab.qcom
-
-    # Keeping following partitions outside fstab file. As user may not have
-    # these partition flashed on the device. Failure to mount any partition in fstab file
-    # results in failure to launch late-start class.
-    wait /dev/block/platform/msm_sdcc.1/by-name/cache
-    exec /system/bin/logwrapper /system/bin/mount_ext4.sh cache /dev/block/platform/msm_sdcc.1/by-name/cache /cache
-
-    wait /dev/block/platform/msm_sdcc.1/by-name/persist
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
-
-    wait /dev/block/platform/msm_sdcc.1/by-name/modem
-    exec /system/bin/resize2fs /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro nosuid nodev
-
-    # persist
-    wait /dev/block/platform/msm_sdcc.1/by-name/persist
-    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev
-
-    # mount PDS
-    wait /dev/block/platform/msm_sdcc.1/by-name/pds
-    exec /system/bin/mountpds -d /dev/block/platform/msm_sdcc.1/by-name/pds -m rw
-
     # Load FIPS kernel module
     exec /system/bin/fips_loader /system/lib/modules
 
@@ -459,41 +416,16 @@ service atvc /system/bin/dbvc_atvc_property_set
     group mot_tpapi
     oneshot
 
-	# Root Detect
-service qe /xbin/qe /system
-    class main
-    oneshot
-
 service qdumpd /system/bin/qdumpd
     class main
     user radio
     group log sdcard_rw sdcard_r
-
-# The dload.on sys prop provides one-step control over DLOAD Mode.  It sets the
-# allow bit in the sysfs, and then runs qcookie to update the cookie in
-# external storage.
-on property:persist.sys.qc.dload.on=*
-    write /sys/module/restart/parameters/download_mode ${persist.sys.qc.dload.on}
-    stop qcookie
-    start qcookie
-
-# TODO: Is there a sysfs node for allowing ramdumps?  If so, set it here so
-# that this works just like dload.on above.
-on property:persist.sys.qc.rdump.on=*
-    stop qcookie
-    start qcookie
 
 on property:persist.sys.qc.sub.rdump.on=*
     write /sys/module/subsystem_restart/parameters/enable_ramdumps ${persist.sys.qc.sub.rdump.on}
 
 on property:persist.sys.qc.sub.rstrtlvl=*
     write /sys/module/subsystem_restart/parameters/restart_level ${persist.sys.qc.sub.rstrtlvl}
-
-service qcookie /system/bin/qcookie
-    user shell
-    group sdcard_r sdcard_rw media_rw
-    oneshot
-    disabled
 
 on property:init.svc.bootanim=stopped
     start usf-post-boot
@@ -624,11 +556,6 @@ service graphicsd /system/bin/logwrapper /system/bin/graphicsd
     class main
     user system
     group system log
-
-service RescueStarter /system/bin/RescueStarter
-    class main
-    user graphics
-    group input graphics
 
 # Backup/Restore Feature
 on property:mot.backup_restore.status="Finished"

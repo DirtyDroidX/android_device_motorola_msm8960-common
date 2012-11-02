@@ -35,16 +35,18 @@ on init
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
-    exec /system/bin/sh /init.qcom.early_boot.sh ${ro.board.platform}
-    exec /system/bin/sh /init.qcom.syspart_fixup.sh ${ro.board.platform} ${ro.serialno}
+    chmod 755 /system/etc/init.qcom.bt.sh
+    chmod 755 /system/etc/init.qcom.coex.sh
+    chmod 755 /system/etc/init.qcom.mdm_links.sh
+    chmod 755 /system/etc/init.qcom.modem_links.sh
+    chmod 755 /system/etc/init.qcom.post_boot.sh
+    chmod 755 /system/etc/init.qcom.sdio.sh
+    chmod 755 /system/etc/init.qcom.thermald_conf.sh
+    chmod 755 /system/etc/init.qcom.wifit.sh
+    exec /system/bin/sh /init.qcom.early_boot.sh
+    exec /system/bin/sh /init.qcom.syspart_fixup.sh
 
 on early-init
-    # for backwards compatibility
-    export EXTERNAL_STORAGE /storage/sdcard0
-    mkdir /storage 0050 system sdcard_r
-    mkdir /storage/sdcard0 0000 system system
-    symlink /storage/sdcard0 /sdcard
-    symlink /storage/sdcard0 /mnt/sdcard
 
 
 on boot
@@ -152,10 +154,6 @@ on post-fs
 
 # msm specific files that need to be created on /data
 on post-fs-data
-    # we will remap this as /mnt/sdcard with the sdcard fuse tool
-    mkdir /data/media 0775 media_rw media_rw
-    chown media_rw media_rw /data/media
-
     mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     # Create the directories used by the Wireless subsystem
@@ -269,7 +267,7 @@ service rmt_storage /system/bin/rmt_storage
     user root
     disabled
 
-on property:ro.emmc=1
+on property:ro.boot.emmc=1
     start rmt_storage
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
@@ -584,20 +582,6 @@ service profiler_daemon /system/bin/profiler_daemon
     user root
     group root
     disabled
-
-service sdcard /system/bin/sdcard /data/media 1023 1023
-    class late_start
-    disabled
-
-on property:ro.fuse_sdcard=true
-    start sdcard
-
-# This will make sure that sdcard service starts as late_start.
-on nonencrypted
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
-
-on property:vold.decrypt=trigger_restart_framework
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth

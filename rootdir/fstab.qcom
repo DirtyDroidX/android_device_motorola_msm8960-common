@@ -5,5 +5,5 @@
 # Naming convention:
 #   fstab.<ro.hardware> for any fstab that is required for encryption
 
-#<src>                                             <mnt_point>  <type>  <mnt_flags and options>                                        <fs_mgr_flags>
+#<src>                                             <mnt_point>  <type>  <mnt_flags and options>                                                <fs_mgr_flags>
 /dev/block/platform/msm_sdcc.1/by-name/userdata    /data        ext4    rw,discard,nosuid,nodev,noatime,nodiratime,noauto_da_alloc,nobarrier   wait,check,encryptable=footer
