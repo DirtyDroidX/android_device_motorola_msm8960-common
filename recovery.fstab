@@ -28,7 +28,7 @@
 # mount point	fstype		device			[device2]
 
 /sdcard         datamedia       /dev/null
-/external_sd    vfat            /dev/block/mmcblk1p1    /dev/block/mmcblk1
+/external_sd    vfat            /dev/block/mmcblk1p1
 /system         ext4            /dev/block/platform/msm_sdcc.1/by-name/system
 /cache          ext4            /dev/block/platform/msm_sdcc.1/by-name/cache
 /data           ext4            /dev/block/platform/msm_sdcc.1/by-name/userdata
@@ -37,4 +37,4 @@
 /logo           emmc            /dev/block/platform/msm_sdcc.1/by-name/logo
 /recovery       emmc            /dev/block/platform/msm_sdcc.1/by-name/recovery
 /pds            ext4            /dev/block/platform/msm_sdcc.1/by-name/pds
-/modem          ext4		    /dev/block/platform/msm_sdcc.1/by-name/modem
+/modem          ext4            /dev/block/platform/msm_sdcc.1/by-name/modem
