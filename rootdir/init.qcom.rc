@@ -42,7 +42,8 @@ on early-boot
     chmod 755 /system/etc/init.qcom.post_boot.sh
     chmod 755 /system/etc/init.qcom.sdio.sh
     chmod 755 /system/etc/init.qcom.thermald_conf.sh
-    chmod 755 /system/etc/init.qcom.wifit.sh
+    chmod 755 /system/etc/init.qcom.wifi.sh
+    chmod 755 /system/etc/usf_post_boot.sh
     exec /system/bin/sh /init.qcom.early_boot.sh
     exec /system/bin/sh /init.qcom.syspart_fixup.sh
 

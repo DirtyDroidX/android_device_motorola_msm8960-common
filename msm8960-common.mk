@@ -133,7 +133,8 @@ PRODUCT_PACKAGES += \
     init.qcom.post_boot.sh \
     init.qcom.sdio.sh \
     init.qcom.thermald_conf.sh \
-    init.qcom.wifi.sh
+    init.qcom.wifi.sh \
+    usf_post_boot.sh
 
 # Torch
 PRODUCT_PACKAGES += Torch
