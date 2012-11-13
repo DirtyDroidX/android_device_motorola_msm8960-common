@@ -141,6 +141,7 @@ PRODUCT_PACKAGES += Torch
 
 # STK
 PRODUCT_PACKAGES += Stk
+
 # Charger
 PRODUCT_PACKAGES += charger charger_res_images
 
@@ -150,6 +151,9 @@ PRODUCT_PACKAGES += qrngd
 # Misc
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
+
+# strace
+PRODUCT_PACKAGES += strace
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
