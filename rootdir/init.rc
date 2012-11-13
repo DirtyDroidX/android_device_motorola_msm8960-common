@@ -384,6 +384,11 @@ on boot
     write /proc/sys/net/core/rmem_max  2097152
     write /proc/sys/net/core/wmem_max  1220608
 
+# Setup trace files
+    mkdir /data/trace 0777 root root
+    chown root root /data/trace
+    chmod 0777 /data/trace
+
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
 
