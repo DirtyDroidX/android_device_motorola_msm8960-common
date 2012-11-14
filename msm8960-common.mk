@@ -155,6 +155,16 @@ PRODUCT_PACKAGES += \
 # strace
 PRODUCT_PACKAGES += strace
 
+# Motorola Binaries
+PRODUCT_PACKAGES += \
+    batt_health \
+    charge_only_mode \
+    graphicsd \
+    modemlog \
+    mot_boot_mode \
+    motobox \
+    recover_userdata  
+
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapers \
