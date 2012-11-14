@@ -164,7 +164,10 @@ PRODUCT_PACKAGES += \
     modemlog \
     mot_boot_mode \
     motobox \
-    recover_userdata  
+    recover_userdata
+
+# wiperifce symlink
+PRODUCT_PACKAGES += wiperiface
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
