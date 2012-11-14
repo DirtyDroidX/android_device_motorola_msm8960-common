@@ -49,6 +49,9 @@ char const*const GREEN_LED_FILE
 char const*const BLUE_LED_FILE
         = "/sys/class/leds/blue/brightness";
 
+char const*const RGB_BLINK_FILE
+        = "/sys/class/leds/red/blink";
+
 char const*const LCD_FILE
         = "/sys/class/backlight/lcd-backlight/brightness";
 
@@ -180,7 +183,7 @@ set_speaker_light_locked(struct light_device_t* dev,
     }
 
     if (blink) {
-        write_int(RED_LED_FILE, freq);
+        write_int(RGB_BLINK_FILE, freq);
     }
 
     return 0;
