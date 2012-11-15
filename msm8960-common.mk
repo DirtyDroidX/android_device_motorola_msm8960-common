@@ -238,7 +238,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
     ril.subscription.types=NV,RUIM \
-    ro.telephony.ril_class=MotorolaQualcommRIL \
     persist.radio.eons.enabled= true \
     keyguard.no_require_sim=true \
     ro.use_data_netmgrd=true \
