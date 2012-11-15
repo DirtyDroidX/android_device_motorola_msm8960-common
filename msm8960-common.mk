@@ -25,6 +25,15 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/rootdir/init.rc:root/init.rc \
     $(COMMON_FOLDER)/rootdir/ueventd.rc:root/ueventd.rc \
 
+# SafeStrap files
+PRODUCT_COPY_FILES += \
+    $(COMMON_FOLDER)/rootdir/init.rc:system/etc/rootfs/init.rc \
+    $(COMMON_FOLDER)/rootdir/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
+    $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
+    $(COMMON_FOLDER)/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
+    $(COMMON_FOLDER)/safestrap/adbd:system/etc/rootfs/sbin/adbd \
+    $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
