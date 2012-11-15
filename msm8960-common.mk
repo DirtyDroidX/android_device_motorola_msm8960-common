@@ -11,14 +11,6 @@ $(call inherit-product-if-exists, vendor/motorola/msm8960-common/msm8960-common-
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += $(COMMON_FOLDER)/overlay
 
-# Audio configuration
-PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/audio/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
-    $(COMMON_FOLDER)/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
-    $(COMMON_FOLDER)/audio/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
-    $(COMMON_FOLDER)/audio/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \
-    $(COMMON_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf
-
 # EGL config
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/configs/egl.cfg:system/lib/egl/egl.cfg
@@ -46,16 +38,14 @@ PRODUCT_PACKAGES += \
     copybit.msm8960 \
     gralloc.msm8960 \
     hwcomposer.msm8960 \
-    lights.msm8960 \
     power.msm8960
 
-#    hwcomposer.msm8960
 # GPS
 #PRODUCT_PACKAGES += \
 #	gps.msm8960
 
 # Lights
-#PRODUCT_PACKAGES += lights.msm8960
+PRODUCT_PACKAGES += lights.msm8960
 
 # NFC Support
 PRODUCT_PACKAGES += \
