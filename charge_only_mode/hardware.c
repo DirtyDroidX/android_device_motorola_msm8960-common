@@ -245,7 +245,7 @@ void set_brightness(float percent)
 	char b[20];
 
         ALOGD("set_brightness: %f\n", percent);
-	fd = open("/sys/class/leds/lcd-backlight/brightness", O_RDWR);
+	fd = open("/sys/class/backlight/lcd-backlight/brightness", O_RDWR);
 	if (fd < 0) {
 		fd = open("/sys/class/backlight/lm3532_bl/brightness", O_RDWR);
 		if (fd < 0)
