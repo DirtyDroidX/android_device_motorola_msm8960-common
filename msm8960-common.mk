@@ -32,6 +32,7 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
     $(COMMON_FOLDER)/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
     $(COMMON_FOLDER)/safestrap/adbd:system/etc/rootfs/sbin/adbd \
+    $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/sbin/default.prop \
     $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
 
 # Audio
