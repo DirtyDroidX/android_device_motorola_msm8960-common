@@ -74,6 +74,11 @@ endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
 
+# GPS configuration
+PRODUCT_COPY_FILES += \
+	device/motorola/msm8960-common/configs/gps.conf:system/etc/gps.conf
+
+
 # QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
