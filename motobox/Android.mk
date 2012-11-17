@@ -26,7 +26,6 @@ HAVE_DEVUTILS ?= false
 endif
 
 TOOLS := \
-	cp \
 	test \
 	md5sum \
 	getconfig \

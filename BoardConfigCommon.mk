@@ -5,12 +5,17 @@ BOARD_VENDOR := motorola
 # Bootloader
 TARGET_NO_BOOTLOADER := true
 TARGET_BOOTLOADER_BOARD_NAME := MSM8960
+TARGET_NO_RADIOIMAGE := true
 
 # Architecture
+TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_ARCH_VARIANT_CPU := cortex-a9
+ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
 
 # Platform
@@ -23,6 +28,7 @@ TARGET_KERNEL_CONFIG        := msm8960_mmi_motorola_defconfig
 BOARD_KERNEL_CMDLINE        := console=/dev/null androidboot.hardware=qcom user_debug=31 loglevel=1 msm_rtb.filter=0x3F kgsl.mmutype=gpumm
 BOARD_KERNEL_BASE           := 0x80200000
 BOARD_FORCE_RAMDISK_ADDRESS := 0x81600000
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x81600000
 BOARD_KERNEL_PAGESIZE       := 2048
 
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -31,14 +37,16 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00A00000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1560281088
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-# Wifi
-WIFI_BAND := 802_11_ABG
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_HOSTAPD_DRIVER             := NL80211
-WIFI_DRIVER_MODULE_PATH          := "/system/lib/modules/wlan.ko"
-WIFI_DRIVER_MODULE_NAME          := "wlan"
-BOARD_WLAN_DEVICE                := qcwcn
+# FIXME: HOSTAPD-derived wifi driver
+BOARD_HAS_QCOM_WLAN := true
+BOARD_WLAN_DEVICE := qcwcn
+WPA_SUPPLICANT_VERSION := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+BOARD_HOSTAPD_DRIVER := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB := lib_driver_cmd_$(BOARD_WLAN_DEVICE)
+WIFI_DRIVER_FW_PATH_STA := "sta"
+WIFI_DRIVER_FW_PATH_AP  := "ap"
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -66,6 +74,7 @@ TARGET_PROVIDES_LIBLIGHTS := true
 # Audio
 BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_FLUENCE_INCALL := true
+BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
 # Number of supplementary service groups allowed by init
 TARGET_NR_SVC_SUPP_GIDS := 28

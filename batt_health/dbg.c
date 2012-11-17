@@ -27,7 +27,7 @@ void BHD_DBG_data_dump(void* databuff, int len)
 				value = ((unsigned char*)databuff)[buffer_index++];
 				sprintf(string_buffer, "%s%02x ", string_buffer, value);
 			}
-			ALOGD_V("%s", string_buffer);
+			ALOGV("%s", string_buffer);
 		}
         }
 }
