@@ -1,4 +1,3 @@
-TOOL(cp)
 TOOL(test)
 TOOL(md5sum)
 TOOL(getconfig)
