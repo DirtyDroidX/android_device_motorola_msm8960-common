@@ -12,7 +12,6 @@
 // control_perms structs with the following:
 #define PROPERTY_PERMS_APPEND \
     { "radio.",           AID_RADIO,    0 }, \
-    { "net.rmnet0.",      AID_RADIO,    0 }, \
     { "net.vpnclient",    AID_VPN,      0 }, \
     { "net.dnschange",    AID_VPN,      0 }, \
     { "wifi.",            AID_WIFI,     0 }, \
