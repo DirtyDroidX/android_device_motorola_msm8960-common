@@ -28,6 +28,9 @@
 #
 import init.mmi.usb.rc
 
+on early-init
+    mount debugfs debugfs /sys/kernel/debug
+
 on init
     # Configure coredump
     write /proc/sys/kernel/core_pattern "|/system/bin/coredump %e %p %t"
