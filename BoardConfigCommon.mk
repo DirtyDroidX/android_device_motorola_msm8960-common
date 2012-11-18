@@ -28,7 +28,6 @@ TARGET_KERNEL_CONFIG        := msm8960_mmi_motorola_defconfig
 BOARD_KERNEL_CMDLINE        := console=/dev/null androidboot.hardware=qcom user_debug=31 loglevel=1 msm_rtb.filter=0x3F kgsl.mmutype=gpumm
 BOARD_KERNEL_BASE           := 0x80200000
 BOARD_FORCE_RAMDISK_ADDRESS := 0x81600000
-BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x81600000
 BOARD_KERNEL_PAGESIZE       := 2048
 
 TARGET_USERIMAGES_USE_EXT4 := true
