@@ -108,9 +108,13 @@ on boot
 
     # Change owner and group for media server and surface flinger
     chown system system /sys/devices/virtual/graphics/fb1/format_3d
+    chown system system /sys/devices/virtual/graphics/fb1/hpd
 
     #For bridgemgr daemon to inform the USB driver of the correct transport
     chown radio radio /sys/class/android_usb/f_rmnet_smd_sdio/transport
+
+    chmod 660 /dev/rtc0
+    chown system system /dev/rtc0
 
     # permissions updates to Camera Flash and torch nodes
     chown system camera /sys/class/leds/torch-flash/camera_strobe
@@ -153,9 +157,6 @@ on post-fs
 # Service not used
 #    exec export_rc /persist/init.cne.rc
 
-# msm specific files that need to be created on /data
-on post-fs-data
-    mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -163,6 +164,10 @@ on post-fs-data
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
+
+
+    write /dev/wcnss_wlan 1
+    write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
 
     # Create directory used by audio subsystem
     mkdir /data/misc/audio 0770 audio audio
@@ -217,6 +222,7 @@ on post-fs-data
 
     mkdir /data/audio/ 0770 media audio
     # Enable the setgid bit on the directory
+    mkdir /data/audio 0770 media audio
     chmod 2770 /data/audio
 
     setprop vold.post_fs_data_done 1
@@ -268,13 +274,13 @@ service rmt_storage /system/bin/rmt_storage
     user root
     disabled
 
-on property:ro.boot.emmc=1
+on property:vold.decrypt=trigger_restart_framework
     start rmt_storage
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
-    group qcom_oncrpc bluetooth net_bt_admin
+    group qcom_oncrpc bluetooth net_bt_admin system
     disabled
     oneshot
 

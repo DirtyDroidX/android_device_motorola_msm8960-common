@@ -110,7 +110,6 @@
 
 /dev/pmem_audio           0660   system     audio
 /dev/msm_acdb             0660   system     audio
-/dev/radio0               0644   fm_radio   fm_radio
 /dev/i2c-0                0664   root       system
 /dev/i2c-1                0664   root       system
 /dev/i2c-2                0664   root       system

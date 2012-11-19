@@ -4,8 +4,9 @@
 # This is a common source of Android security bugs.
 #
 
-import /init.${ro.hardware}.rc
 import /init.usb.rc
+import /init.${ro.hardware}.rc
+import /init.target.rc
 import /init.trace.rc
 
 on early-init
@@ -40,6 +41,7 @@ loglevel 7
     export ANDROID_ROOT /system
     export ANDROID_ASSETS /system/app
     export ANDROID_DATA /data
+    export ANDROID_STORAGE /storage
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
     export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework2.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
@@ -148,10 +150,16 @@ loglevel 7
     chmod 0644 /dev/xt_qtaguid
 
 on fs
+# mount mtd partitions
+    # Mount /system rw first to give the filesystem a chance to save a checkpoint
+    mount yaffs2 mtd@system /system
+    mount yaffs2 mtd@system /system ro remount
+    mount yaffs2 mtd@userdata /data nosuid nodev
+    mount yaffs2 mtd@cache /cache nosuid nodev
+
     mount_all ./fstab.qcom
     setprop ro.fuse_sdcard true
 
-on emmc-fs
 # mount mmc partitions
     wait /dev/block/platform/msm_sdcc.1/by-name/system
     mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system rw barrier=1
@@ -334,8 +342,8 @@ on boot
     chown radio system /sys/android_power/acquire_full_wake_lock
     chown radio system /sys/android_power/acquire_partial_wake_lock
     chown radio system /sys/android_power/release_wake_lock
-    chown system system /sys/power/state
     chown system system /sys/power/autosleep
+    chown system system /sys/power/state
     chown system system /sys/power/wakeup_count
     chown radio system /sys/power/wake_lock
     chown radio system /sys/power/wake_unlock

@@ -105,6 +105,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     make_ext4fs \
     e2fsck \
+    resize2fs \
     setup_fs
 
 # for bugmailer
