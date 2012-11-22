@@ -26,14 +26,9 @@ HAVE_DEVUTILS ?= false
 endif
 
 TOOLS := \
-	cp \
 	test \
-	md5sum \
 	getconfig \
-	ptf \
-	mkswap \
-	swapon \
-	swapoff
+	ptf
 
 LOCAL_STATIC_LIBRARIES := libcutils
 
