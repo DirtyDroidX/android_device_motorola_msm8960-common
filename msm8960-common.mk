@@ -3,7 +3,9 @@ COMMON_FOLDER := device/motorola/msm8960-common
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 ## The gps config appropriate for this device
-PRODUCT_COPY_FILES += device/common/gps/gps.conf_US_SUPL:system/etc/gps.conf
+PRODUCT_COPY_FILES += \
+	device/motorola/msm8960-common/configs/gps.conf:system/etc/gps.conf
+
 
 ## (2) Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/motorola/msm8960-common/msm8960-common-vendor.mk)
@@ -73,11 +75,6 @@ else
 endif
 PRODUCT_COPY_FILES += \
     $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml
-
-# GPS configuration
-PRODUCT_COPY_FILES += \
-	device/motorola/msm8960-common/configs/gps.conf:system/etc/gps.conf
-
 
 # QCOM Display
 PRODUCT_PACKAGES += \
