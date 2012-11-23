@@ -174,6 +174,13 @@ PRODUCT_PACKAGES += \
     wiperiface \
     WCNSS_qcom_wlan_nv.bin
 
+# wifi
+PRODUCT_COPY_FILES += \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_regulatory.bin
+
 # Live Wallpapers
 PRODUCT_PACKAGES += \
     LiveWallpapers \
