@@ -38,6 +38,7 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
+    audio.usb.default \
     audio_policy.msm8960 \
     audio.primary.msm8960 \
     libalsa-intf \
@@ -171,8 +172,16 @@ PRODUCT_PACKAGES += \
     motobox \
     recover_userdata
 
-# wiperifce symlink
-PRODUCT_PACKAGES += wiperiface
+# symlinks
+PRODUCT_PACKAGES += \
+    wiperiface \
+    WCNSS_qcom_wlan_nv.bin
+
+# wifi
+PRODUCT_COPY_FILES += \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_regulatory.bin
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -298,10 +307,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # OpenglES
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072   
+    ro.opengles.version=131072
 
 # # adb has root
-PRODUCT_PROPERTY_OVERRIDES +=persist.sys.root_access=3
+PRODUCT_PROPERTY_OVERRIDES += persist.sys.root_access=3
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
