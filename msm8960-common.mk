@@ -20,6 +20,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml
 #    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
+# Audio configuration
+PRODUCT_COPY_FILES += \
+	device/motorola/msm8960-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x
+
 # init*rc
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/rootdir/init.rc:root/init.rc \
@@ -279,8 +283,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.mode=endfire \
     persist.audio.vr.enable=false \
-    persist.audio.handset.mic=digital \
-    ro.qc.sdk.audio.fluencetype=fluence \
+    persist.audio.handset.mic=dmic \
     ro.qc.sdk.audio.ssr=false
 
 # Bluetooth
