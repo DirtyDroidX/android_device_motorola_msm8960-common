@@ -22,6 +22,11 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml
 #    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
+# Audio configuration
+PRODUCT_COPY_FILES += \
+	device/motorola/msm8960-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
+	device/motorola/msm8960-common/audio/audio_policy.conf:system/etc/audio_policy.conf
+
 # init*rc
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/rootdir/init.rc:root/init.rc \
