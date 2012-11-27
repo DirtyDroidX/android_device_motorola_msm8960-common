@@ -6,7 +6,6 @@
 
 import /init.usb.rc
 import /init.${ro.hardware}.rc
-import /init.target.rc
 import /init.trace.rc
 
 on early-init
@@ -55,6 +54,7 @@ loglevel 7
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell 0700 shell shell
     mkdir /storage 0050 root sdcard_r
+    mkdir /storage/emulated 0555 root root
 
     # Support legacy paths
     symlink /storage/emulated/legacy /sdcard
@@ -428,12 +428,6 @@ on boot
 
 # Set this property so surfaceflinger is not started by system_init
     setprop system_init.startsurfaceflinger 0
-
-# Run sysinit
-    exec /system/bin/sysinit
-
-    class_start core
-    class_start main
 
 on nonencrypted
     class_start late_start
