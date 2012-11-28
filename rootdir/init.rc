@@ -606,10 +606,3 @@ service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
 
 on property:ro.fuse_sdcard=true
     start sdcard
-
-# This will make sure that sdcard service starts as late_start.
-on nonencrypted
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
-
-on property:vold.decrypt=trigger_restart_framework
-    setprop ro.fuse_sdcard ${persist.fuse_sdcard}
