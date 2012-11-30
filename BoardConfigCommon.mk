@@ -80,6 +80,7 @@ BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
 # Number of supplementary service groups allowed by init
 TARGET_NR_SVC_SUPP_GIDS := 28
+TARGET_USES_MOTOROLA_LOG := true
 
 # Flags
 COMMON_GLOBAL_CFLAGS += -DQCOM_HARDWARE -D__ARM_USE_PLD -D__ARM_CACHE_LINE_SIZE=64
