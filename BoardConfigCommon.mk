@@ -78,6 +78,9 @@ BOARD_USES_ALSA_AUDIO := true
 BOARD_USES_FLUENCE_INCALL := true
 BOARD_USES_SEPERATED_AUDIO_INPUT := true
 
+# We still have the old ION API
+BOARD_HAVE_OLD_ION_API := true
+
 # Number of supplementary service groups allowed by init
 TARGET_NR_SVC_SUPP_GIDS := 28
 TARGET_USES_MOTOROLA_LOG := true
