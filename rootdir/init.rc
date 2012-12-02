@@ -43,7 +43,7 @@ loglevel 7
     export ANDROID_STORAGE /storage
     export ASEC_MOUNTPOINT /mnt/asec
     export LOOP_MOUNTPOINT /mnt/obb
-    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/framework2.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
+    export BOOTCLASSPATH /system/framework/core.jar:/system/framework/core-junit.jar:/system/framework/bouncycastle.jar:/system/framework/ext.jar:/system/framework/framework.jar:/system/framework/telephony-common.jar:/system/framework/mms-common.jar:/system/framework/android.policy.jar:/system/framework/services.jar:/system/framework/apache-xml.jar
 
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
@@ -83,6 +83,7 @@ loglevel 7
 
     # See storage config details at http://source.android.com/tech/storage/
     mkdir /mnt/shell 0700 shell shell
+    mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage 0050 root sdcard_r
     mkdir /storage/emulated 0555 root root
 
