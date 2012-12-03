@@ -42,8 +42,7 @@ BOARD_WLAN_DEVICE                := qcwcn
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
-BLUETOOTH_HCI_USE_MCT := true
+TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/msm8960-common/bluetooth.c
 
 # NFC
 BOARD_HAVE_NFC := true
