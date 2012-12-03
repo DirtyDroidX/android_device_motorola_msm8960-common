@@ -77,6 +77,7 @@
 /dev/hw_random            0660   system     system
 /dev/rtc0                 0660   system     system
 /dev/block/mmcblk1p1      0660   system     system
+/dev/assd                 0660   smartcard  smartcard
 
 #permissions for audio
 /dev/msm_qcelp            0660   system     audio
@@ -122,6 +123,19 @@
 /dev/qseecom              0660   system     mot_tpapi
 /dev/qce                  0660   system     mot_tpapi
 /dev/sec                  0660   system     mot_tpapi
+/dev/gss                  0660   gps        gps
+/dev/radio0               0644   fm_radio   fm_radio
+/dev/msm_voicememo        0660   system     audio
+/dev/msm_pcm_lp_dec       0660   system     audio
+/dev/msm_mvs              0660   system     audio
+/dev/msm_qcelp_in         0660  system       audio
+/dev/msm_evrc_in          0660  system       audio
+/dev/msm_preproc_ctl      0660  system       audio
+/dev/msm_qcelp            0660  system       audio
+/dev/msm_evrc             0660  system       audio
+/dev/msm_acdb             0660  system     audio
+/dev/msm_fm               0660  system       audio
+/dev/msm_rtac             0660  system       audio
 
 # EMU detection
 /dev/emu_det              0660  mot_accy     mot_whisper

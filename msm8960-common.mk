@@ -22,19 +22,14 @@ PRODUCT_COPY_FILES += \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-	device/motorola/msm8960-common/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x
-
-# init*rc
-PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/rootdir/init.rc:root/init.rc \
-    $(COMMON_FOLDER)/rootdir/ueventd.rc:root/ueventd.rc \
+	$(COMMON_FOLDER)/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x
 
 # SafeStrap files
 PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/rootdir/init.rc:system/etc/rootfs/init.rc \
+    $(COMMON_FOLDER)/safestrap/init.rc:system/etc/rootfs/init.rc \
     $(COMMON_FOLDER)/rootdir/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
     $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
-    $(COMMON_FOLDER)/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
+    $(COMMON_FOLDER)/safestrap/ueventd.rc:system/etc/rootfs/ueventd.rc \
     $(COMMON_FOLDER)/safestrap/adbd:system/etc/rootfs/sbin/adbd \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
     $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
@@ -81,7 +76,7 @@ PRODUCT_COPY_FILES += \
 
 # GPS configuration
 PRODUCT_COPY_FILES += \
-	device/motorola/msm8960-common/configs/gps.conf:system/etc/gps.conf
+	$(COMMON_FOLDER)/configs/gps.conf:system/etc/gps.conf
 
 
 # QCOM Display

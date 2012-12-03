@@ -28,6 +28,19 @@
 #
 import init.mmi.usb.rc
 
+on early-init
+    mkdir /firmware 0771 system system
+    symlink /data/tombstones /tombstones
+    mkdir /persist 0771 system system
+    export SECONDARY_STORAGE /storage/sdcard1
+    export ANDROID_PRINTF_LOG threadtime
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /mnt/external1 0000 system system
+    symlink /storage/sdcard1 /mnt/external1
+    symlink /storage/sdcard1 /external_sd
+    # Create PDS mount point
+    mkdir /pds 0755 root root
+
 on init
     # Configure coredump
     write /proc/sys/kernel/core_pattern "|/system/bin/coredump %e %p %t"
@@ -120,6 +133,40 @@ on property:ro.modem.no_wdog_chk=1
    write /sys/module/modem_8960/parameters/no_wdog_chk 1
 
 on fs
+
+on emmc-fs
+    # Mount system so that recover_userdata is available
+    wait /dev/block/platform/msm_sdcc.1/by-name/system
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/system /system rw barrier=1
+    # Try to recover/mount userdata in the error case.
+    wait /dev/block/platform/msm_sdcc.1/by-name/userdata
+    exec /system/bin/logwrapper /system/bin/recover_userdata ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data
+    #mount ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data nosuid nodev noatime nodiratime
+    # Mount userdata -- userdata must be in fstab.<ro.hardware> in order to
+    # have functional encryption
+    mount_all fstab.qcom
+
+    # Keeping following partitions outside fstab file. As user may not have
+    # these partition flashed on the device. Failure to mount any partition in fstab file
+    # results in failure to launch late-start class.
+    wait /dev/block/platform/msm_sdcc.1/by-name/cache
+    exec /system/bin/logwrapper /system/bin/mount_ext4.sh cache /dev/block/platform/msm_sdcc.1/by-name/cache /cache
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/modem
+    exec /system/bin/resize2fs /dev/block/platform/msm_sdcc.1/by-name/modem
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro nosuid nodev
+
+    # persist
+    wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev
+
+    # mount PDS
+    wait /dev/block/platform/msm_sdcc.1/by-name/pds
+    exec /system/bin/mountpds -d /dev/block/platform/msm_sdcc.1/by-name/pds -m rw
+
     # Load FIPS kernel module
     exec /system/bin/fips_loader /system/lib/modules
 
@@ -130,6 +177,9 @@ on post-fs-data
 
 # To remove apanic proc entry
     write /proc/apanic_console 1
+
+# Include extra init file
+    import /init.vzw.rc
 
 on boot
    mount debugfs /sys/kernel/debug /sys/kernel/debug
@@ -283,12 +333,16 @@ on boot
     chown root log /data/dontpanic/last_kmsg
     chmod 0640 /data/dontpanic/last_kmsg
 
+    # Setup trace files
+    mkdir /data/trace 0777 root root
+    chown root root /data/trace
+
     # Start services
     exec /system/bin/mot_boot_mode
 
 on post-fs-data
-   mkdir /data/misc/ril 0750 radio radio
-   mkdir /data/misc/ril/bp-dumps 0750 radio log
+    mkdir /data/misc/ril 0750 radio radio
+    mkdir /data/misc/ril/bp-dumps 0750 radio log
 
    # Setup correct permissions for /pds/public
     mkdir /pds/public/atvc 0775 mot_tcmd shell
@@ -296,11 +350,15 @@ on post-fs-data
     mkdir /data/local/dbvc 0750 mot_tcmd shell
     mkdir /data/local/atvc 0775 mot_tcmd shell
 
-   mkdir /data/tombstones 0771 system system
-   mkdir /tombstones/modem 0771 system system
-   mkdir /tombstones/lpass 0771 system system
-   mkdir /tombstones/wcnss 0771 system system
-   mkdir /tombstones/dsps 0771 system system
+    mkdir /data/tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /tombstones/wcnss 0771 system system
+    mkdir /tombstones/dsps 0771 system system
+
+    # from moto init.rc
+    chmod 0777 /data/trace
+    chown system system /sys/power/autosleep
 
 # directory for encryption management tool, enc_mgt_tool
     mkdir /data/emt
