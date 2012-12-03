@@ -133,8 +133,6 @@ enum {
 	NUM_HSIC_PARAM,
 };
 
-#define MDSS_MDP_ROT_ONLY              0x80
-
 /* mdp_blit_req flag values */
 #define MDP_ROT_NOP 0
 #define MDP_FLIP_LR 0x1
