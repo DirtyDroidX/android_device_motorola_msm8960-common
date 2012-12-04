@@ -35,6 +35,8 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
     $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
 
+# Camera wrapper
+PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
