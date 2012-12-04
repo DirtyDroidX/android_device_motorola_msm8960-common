@@ -17,8 +17,8 @@ PRODUCT_COPY_FILES += \
 
 # Media config
 PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml
-#    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml \
+    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
