@@ -22,7 +22,8 @@ PRODUCT_COPY_FILES += \
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
-	$(COMMON_FOLDER)/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x
+	$(COMMON_FOLDER)/audio/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
+	$(COMMON_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # SafeStrap files
 PRODUCT_COPY_FILES += \
