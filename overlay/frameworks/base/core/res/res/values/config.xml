@@ -333,4 +333,7 @@
     <!-- Default interface to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>
 
+    <!-- We dont have different firmware for wifi modes, prevent reloading it -->	
+    <bool name="config_wifiApFirmwareReload">false</bool>
+
 </resources>
