@@ -89,6 +89,7 @@ BOARD_USES_QCOM_HARDWARE := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
+TARGET_NO_HW_VSYNC := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 BOARD_EGL_CFG := device/motorola/msm8960-common/configs/egl.cfg
