@@ -31,6 +31,10 @@ PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
     $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
 
+# CM-specific init file
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/init.local.rc:system/etc/rootfs/init.cm.rc
+ 
 # Camera wrapper
 PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
 # Audio
