@@ -20,7 +20,6 @@ PRODUCT_COPY_FILES += \
 # Media config
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/configs/media_codecs.xml:system/etc/media_codecs.xml
-#    $(COMMON_FOLDER)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -45,6 +44,8 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.local.rc:system/etc/rootfs/init.cm.rc
 
+# Camera wrapper
+PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
 # Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \

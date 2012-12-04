@@ -147,6 +147,7 @@ on post-fs-data
     copy /proc/apanic_app_threads /data/dontpanic/apanic_app_threads
     chown root log /data/dontpanic/apanic_app_threads
     chmod 0660 /data/dontpanic/apanic_app_threads
+    chmod 755 /system/bin/qcamerasrvwrapper.sh
 
 # To remove apanic proc entry
     write /proc/apanic_console 1
@@ -159,6 +160,8 @@ on boot
 
    write /sys/devices/i2c-3/3-0024/cyttsp_update_fw 1
    write /sys/devices/i2c-3/3-005b/update_fw 1
+   rm /data/cam_socket0
+   rm /data/cam_socket1
    start qcamerasvr
 
    # Backlight permissions
@@ -335,10 +338,10 @@ on post-fs-data
     chmod 0770 /data/emt
 
 #start camera server as daemon
-service qcamerasvr /system/bin/mm-qcamera-daemon
-        class core
-        user camera
-        group camera system inet input graphics
+service qcamerasvr /system/bin/logwrapper /system/bin/qcamerasrvwrapper.sh
+    class late_start
+    user system
+    group system camera inet
 
 #start GNSS/Sensor interface daemon
 #service gsiff_daemon /system/bin/gsiff_daemon
