@@ -47,6 +47,8 @@ on init
     write /proc/self/coredump_filter "0x7f"
     write /proc/sys/fs/suid_dumpable 0
 
+    loglevel 7
+
 # Mount Points for External Storage Devices
     mkdir /storage/usbdisk_1.1.1 0755 system system
     mkdir /storage/usbdisk_1.0 0755 system system

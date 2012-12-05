@@ -28,9 +28,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
     system/core/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
-    $(COMMON_FOLDER)/rootdir/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
+    $(COMMON_FOLDER)/safestrap/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
     $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
+    $(COMMON_FOLDER)/rootdir/ueventd.qcom.rc:system/etc/rootfs/ueventd.qcom.rc \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
+    $(COMMON_FOLDER)/safestrap/prima/cfg80211.ko:system/lib/modules/prima/cfg80211.ko \
+    $(COMMON_FOLDER)/safestrap/prima/prima_wlan.ko:system/lib/modules/prima/prima_wlan.ko \
     $(OUT)/root/sbin/adbd:system/etc/rootfs/sbin/adbd \
     $(OUT)/fake_packages/init2:system/etc/rootfs/init
 
@@ -186,7 +189,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/wififirmware/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
-    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_regulatory.bin
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_regulatory.bin \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_calibration.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_calibration.bin
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \

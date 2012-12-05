@@ -158,6 +158,11 @@ on boot
 on post-fs
 # Service not used
 #    exec export_rc /persist/init.cne.rc
+
+    rm /system/lib/modules/cfg80211.ko
+    symlink /system/lib/modules/prima/cfg80211.ko /system/lib/modules/cfg80211.ko
+    rm /system/lib/modules/wlan.ko
+    symlink /system/lib/modules/prima/prima_wlan.ko /system/lib/modules/wlan.ko
     insmod /system/lib/modules/cfg80211.ko
     insmod /system/lib/modules/tcp_westwood.ko
 
