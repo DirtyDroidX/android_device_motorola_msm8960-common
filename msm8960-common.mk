@@ -51,7 +51,11 @@ PRODUCT_PACKAGES += \
     audio.primary.msm8960 \
     audio.r_submix.default \
     audio.usb.default \
-    libaudioutils
+    libaudio-resampler
+
+# Bluetooth
+PRODUCT_PACKAGES += \
+    hci_qcomm_init
 
 # HAL
 PRODUCT_PACKAGES += \
@@ -61,8 +65,12 @@ PRODUCT_PACKAGES += \
     power.msm8960
 
 # GPS
-#PRODUCT_PACKAGES += \
-#	gps.msm8960
+PRODUCT_PACKAGES += \
+    libloc_adapter \
+    libloc_eng \
+    libloc_api_v02 \
+    libgps.utils \
+    gps.msm8960
 
 # Lights
 PRODUCT_PACKAGES += lights.msm8960
@@ -87,24 +95,19 @@ PRODUCT_COPY_FILES += \
 # QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
-    libmemalloc \
-    liboverlay \
-    libqdutils \
-    libtilerenderer \
-    libI420colorconvert
+    liboverlay
 
 # Omx
 PRODUCT_PACKAGES += \
-    libdivxdrmdecrypt \
-    libmm-omxcore \
+    libc2dcolorconvert \
     libOmxCore \
-    libstagefrighthw \
     libOmxVdec \
     libOmxVenc \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxEvrcEnc \
-    libOmxQcelp13Enc
+    libOmxQcelp13Enc \
+    libstagefrighthw
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \

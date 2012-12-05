@@ -37,7 +37,7 @@ BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1560281088
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 # bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/d2-common/bluetooth/vnd_moto.txt
+BOARD_BLUEDROID_VENDOR_CONF := device/motorola/msm8960-common/bluetooth/vnd_moto.txt
 
 # FIXME: HOSTAPD-derived wifi driver
 BOARD_HAS_QCOM_WLAN := true
@@ -63,7 +63,7 @@ BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
 
 # GPS
-#BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := msm8960
+BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 
 # Vold
 BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
@@ -72,9 +72,6 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun%d/
 
 # Workaround to avoid issues with legacy liblights on QCOM platforms
 TARGET_PROVIDES_LIBLIGHT := true
-
-# PowerHAL
-TARGET_PROVIDES_POWERHAL := true
 
 # Audio
 BOARD_USES_ALSA_AUDIO := true
@@ -107,7 +104,6 @@ BOARD_USES_QCOM_HARDWARE := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
-TARGET_NO_HW_VSYNC := true
 TARGET_USES_C2D_COMPOSITION := true
 TARGET_USES_ION := true
 BOARD_EGL_CFG := device/motorola/msm8960-common/configs/egl.cfg
