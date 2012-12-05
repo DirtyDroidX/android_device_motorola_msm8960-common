@@ -22,21 +22,25 @@ PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf
 
 # SafeStrap files
+PRODUCT_PACKAGES += \
+    init2
+
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
     system/core/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
     $(COMMON_FOLDER)/rootdir/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
     $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
-    $(COMMON_FOLDER)/safestrap/adbd:system/etc/rootfs/sbin/adbd \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
-    $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
+    $(OUT)/root/sbin/adbd:system/etc/rootfs/sbin/adbd \
+    $(OUT)/fake_packages/init2:system/etc/rootfs/init
 
-# CM-specific init file
+# CM-specific init file for SafeStrap
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.local.rc:system/etc/rootfs/init.cm.rc
  
 # Camera wrapper
 PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
