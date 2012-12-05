@@ -23,10 +23,10 @@ PRODUCT_COPY_FILES += \
 
 # SafeStrap files
 PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/safestrap/init.rc:system/etc/rootfs/init.rc \
+    system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
+    system/core/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
     $(COMMON_FOLDER)/rootdir/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
     $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
-    $(COMMON_FOLDER)/safestrap/ueventd.rc:system/etc/rootfs/ueventd.rc \
     $(COMMON_FOLDER)/safestrap/adbd:system/etc/rootfs/sbin/adbd \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
     $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
