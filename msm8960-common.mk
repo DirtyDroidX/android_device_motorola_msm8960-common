@@ -28,20 +28,22 @@ PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/audio/audio_policy.conf:system/etc/audio_policy.conf \
 	$(COMMON_FOLDER)/audio/audio_effects.conf:system/etc/audio_effects.conf
 
-# init*rc
-PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/rootdir/init.rc:root/init.rc \
-    $(COMMON_FOLDER)/rootdir/ueventd.rc:root/ueventd.rc \
-
 # SafeStrap files
 PRODUCT_COPY_FILES += \
-    $(COMMON_FOLDER)/rootdir/init.rc:system/etc/rootfs/init.rc \
-    $(COMMON_FOLDER)/rootdir/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
+    system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
+    system/core/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
+    $(COMMON_FOLDER)/safestrap/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
     $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
-    $(COMMON_FOLDER)/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
-    $(COMMON_FOLDER)/safestrap/adbd:system/etc/rootfs/sbin/adbd \
+    $(COMMON_FOLDER)/rootdir/ueventd.qcom.rc:system/etc/rootfs/ueventd.qcom.rc \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
-    $(COMMON_FOLDER)/safestrap/init:system/etc/rootfs/init
+    $(COMMON_FOLDER)/safestrap/prima/cfg80211.ko:system/lib/modules/prima/cfg80211.ko \
+    $(COMMON_FOLDER)/safestrap/prima/prima_wlan.ko:system/lib/modules/prima/prima_wlan.ko \
+    $(OUT)/root/sbin/adbd:system/etc/rootfs/sbin/adbd \
+    $(OUT)/fake_packages/init2:system/etc/rootfs/init
+
+# CM-specific init file for SafeStrap
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/init.local.rc:system/etc/rootfs/init.cm.rc
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -65,12 +67,12 @@ PRODUCT_PACKAGES += \
     power.msm8960
 
 # GPS
-PRODUCT_PACKAGES += \
-    libloc_adapter \
-    libloc_eng \
-    libloc_api_v02 \
-    libgps.utils \
-    gps.msm8960
+#PRODUCT_PACKAGES += \
+#    libloc_adapter \
+#    libloc_eng \
+#    libloc_api_v02 \
+#    libgps.utils \
+#    gps.msm8960
 
 # Lights
 PRODUCT_PACKAGES += lights.msm8960
@@ -101,7 +103,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
     libOmxCore \
-    libOmxVdec \
     libOmxVenc \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -323,4 +324,4 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.root_access=3
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-$(call inherit-product-if-exists, vendor/motorola/msm8960-common/jb_42_adreno.mk)
+$(call inherit-product-if-exists, vendor/motorola/msm8960-common/jb_caf_adreno.mk)

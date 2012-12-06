@@ -32,8 +32,6 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
-loglevel 7
-
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -165,6 +163,18 @@ on post-fs
 # Service not used
 #    exec export_rc /persist/init.cne.rc
 
+    rm /system/lib/modules/cfg80211.ko
+    symlink /system/lib/modules/prima/cfg80211.ko /system/lib/modules/cfg80211.ko
+    rm /system/lib/modules/wlan.ko
+    symlink /system/lib/modules/prima/prima_wlan.ko /system/lib/modules/wlan.ko
+    insmod /system/lib/modules/cfg80211.ko
+    insmod /system/lib/modules/tcp_westwood.ko
+
+# msm specific files that need to be created on /data
+on post-fs-data
+    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/media 0775 media_rw media_rw
+    chown media_rw media_rw /data/media
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -197,7 +207,7 @@ on post-fs
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
-    symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
+    #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
     #Create directories for wiper services
     #mkdir /data/wpstiles/ 0755 shell
