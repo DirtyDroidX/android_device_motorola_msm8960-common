@@ -228,6 +228,31 @@ on property:sys.usb.config=ptp,adb
     start adbd
     setprop sys.usb.state ${sys.usb.config}
 
+on property:sys.usb.config=mass_storage
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
+    write /sys/class/android_usb/android0/idProduct ${ro.usb.ms}
+    write /sys/class/android_usb/android0/idVendor 0x22b8
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+    write /sys/devices/virtual/android_usb/android0/f_mass_storage/lun_ex/file /dev/block/vold/179:97
+    setprop sys.usb.state ${sys.usb.config}
+
+on property:sys.usb.config=mass_storage,adb
+    write /sys/class/android_usb/android0/enable 0
+    write /sys/class/android_usb/android0/bDeviceClass 0
+    write /sys/class/android_usb/android0/bDeviceSubClass 0
+    write /sys/class/android_usb/android0/bDeviceProtocol 0
+    write /sys/class/android_usb/android0/idProduct ${ro.usb.ms_adb}
+    write /sys/class/android_usb/android0/idVendor 0x22b8
+    write /sys/class/android_usb/android0/functions ${sys.usb.config}
+    write /sys/class/android_usb/android0/enable 1
+    start adbd
+    write /sys/devices/virtual/android_usb/android0/f_mass_storage/lun_ex/file /dev/block/vold/179:97
+    setprop sys.usb.state ${sys.usb.config}
+
 # Handle kernel uevent usb actions
 # none - back to defaults
 on property:sys.mot.usb.action=none
