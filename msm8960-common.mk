@@ -23,7 +23,8 @@ PRODUCT_COPY_FILES += \
 
 # SafeStrap files
 PRODUCT_PACKAGES += \
-    init2
+    init2 \
+    adbd
 
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
@@ -37,10 +38,6 @@ PRODUCT_COPY_FILES += \
     $(OUT)/root/sbin/adbd:system/etc/rootfs/sbin/adbd \
     $(OUT)/fake_packages/init2:system/etc/rootfs/init
 
-# CM-specific init file for SafeStrap
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.local.rc:system/etc/rootfs/init.cm.rc
- 
 # Camera wrapper
 PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
 
