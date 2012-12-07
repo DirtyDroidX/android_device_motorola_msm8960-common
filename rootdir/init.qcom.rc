@@ -34,6 +34,27 @@ on init
 
 loglevel 7
 
+    mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+
+    export EXTERNAL_STORAGE /storage/emulated/legacy
+    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
+    export SECONDARY_STORAGE /storage/sdcard1
+    export ANDROID_PRINTF_LOG threadtime
+
+    # Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+    symlink /storage/emulated/legacy /storage/sdcard0
+    symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    mkdir /storage/sdcard1 0000 system system
+    mkdir /mnt/external1 0000 system system
+    symlink /storage/sdcard1 /mnt/external1
+    symlink /storage/sdcard1 /external_sd
+    # Create PDS mount point
+    mkdir /pds 0755 root root
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -165,6 +186,11 @@ on post-fs
 # Service not used
 #    exec export_rc /persist/init.cne.rc
 
+# msm specific files that need to be created on /data
+on post-fs-data
+    # we will remap this as /mnt/sdcard with the sdcard fuse tool
+    mkdir /data/media 0775 media_rw media_rw
+    chown media_rw media_rw /data/media
 
     # Create the directories used by the Wireless subsystem
     mkdir /data/misc/wifi 0770 wifi wifi
@@ -172,7 +198,6 @@ on post-fs
     mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
     mkdir /data/misc/dhcp 0770 dhcp dhcp
     chown dhcp dhcp /data/misc/dhcp
-
 
     write /dev/wcnss_wlan 1
     write /sys/module/wcnss_ssr_8960/parameters/enable_riva_ssr 1
@@ -282,7 +307,7 @@ service rmt_storage /system/bin/rmt_storage
     user root
     disabled
 
-on property:vold.decrypt=trigger_restart_framework
+on property:ro.boot.emmc=true
     start rmt_storage
 
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
@@ -597,6 +622,13 @@ service profiler_daemon /system/bin/profiler_daemon
     user root
     group root
     disabled
+
+# virtual sdcard daemon running as media_rw (1023)
+service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+    class late_start
+
+on property:ro.fuse_sdcard=true
+    start sdcard
 
 service hcidump /system/bin/sh /system/etc/hcidump.sh
     user bluetooth
