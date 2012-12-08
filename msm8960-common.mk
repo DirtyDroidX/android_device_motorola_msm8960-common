@@ -74,12 +74,12 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += lights.msm8960
 
 # NFC Support
-PRODUCT_PACKAGES += \
-    libnfc \
-    libnfc_jni \
-    Nfc \
-    Tag \
-    com.android.nfc_extras
+#PRODUCT_PACKAGES += \
+#    libnfc \
+#    libnfc_jni \
+#    Nfc \
+#    Tag \
+#    com.android.nfc_extras
 
 # NFCEE access control
 ifeq ($(TARGET_BUILD_VARIANT),user)
