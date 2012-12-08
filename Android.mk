@@ -1,9 +1,9 @@
 LOCAL_PATH := $(call my-dir)
 
 ifeq ($(BOARD_VENDOR),motorola)
-ifeq ($(TARGET_BOARD_PLATFORM),msm8960)
+ifeq ($(call is-board-platform-in-list,msm8960),true)
 include $(call all-makefiles-under,$(LOCAL_PATH))
-include $(call all-subdir-makefiles,$(LOCAL_PATH))
+include $(all-subdir-makefiles)
 endif
 endif
 
