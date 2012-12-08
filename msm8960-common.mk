@@ -277,7 +277,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
     debug.enabletr=0 \
     debug.composition.type=gpu \
-    debug.mdpcomp.maxlayer=3 \
+    debug.mdpcomp.maxlayer=0 \
     debug.mdpcomp.logs=0
 
 # Audio
