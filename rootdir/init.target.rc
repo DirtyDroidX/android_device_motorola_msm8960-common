@@ -134,8 +134,6 @@ on property:sys.chargeonly.mode=1
 on property:ro.modem.no_wdog_chk=1
    write /sys/module/modem_8960/parameters/no_wdog_chk 1
 
-on fs
-
 on emmc-fs
     # Mount system so that recover_userdata is available
     wait /dev/block/platform/msm_sdcc.1/by-name/system
