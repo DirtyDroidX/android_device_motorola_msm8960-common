@@ -32,7 +32,8 @@ PRODUCT_COPY_FILES += \
     system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
     system/core/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
     $(COMMON_FOLDER)/safestrap/init.qcom.rc:system/etc/rootfs/init.qcom.rc \
-    $(COMMON_FOLDER)/rootdir/init.target.rc:system/etc/rootfs/init.target.rc \
+    $(COMMON_FOLDER)/safestrap/init.target.rc:system/etc/rootfs/init.target.rc \
+    $(COMMON_FOLDER)/rootdir/init.mmi.usb.rc:system/etc/rootfs/init.mmi.usb.rc \
     $(COMMON_FOLDER)/rootdir/ueventd.qcom.rc:system/etc/rootfs/ueventd.qcom.rc \
     $(COMMON_FOLDER)/safestrap/default.prop:system/etc/rootfs/default.prop \
     $(COMMON_FOLDER)/safestrap/prima/cfg80211.ko:system/lib/modules/prima/cfg80211.ko \
@@ -55,6 +56,8 @@ PRODUCT_PACKAGES += \
     audio.r_submix.default \
     audio.usb.default \
     libaudio-resampler
+
+PRODUCT_PACKAGES += tinymix tinycap tinyplay
 
 # Bluetooth
 PRODUCT_PACKAGES += \

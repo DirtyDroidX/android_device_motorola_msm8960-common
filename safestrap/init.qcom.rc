@@ -32,6 +32,8 @@ on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
 
+loglevel 7
+
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
@@ -46,9 +48,6 @@ on early-boot
     chmod 755 /system/etc/usf_post_boot.sh
     exec /system/bin/sh /init.qcom.early_boot.sh
     exec /system/bin/sh /init.qcom.syspart_fixup.sh
-
-on early-init
-
 
 on boot
     exec system/bin/btnvtool -O

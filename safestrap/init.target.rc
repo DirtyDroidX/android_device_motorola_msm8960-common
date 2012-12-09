@@ -129,14 +129,22 @@ on property:ro.modem.no_wdog_chk=1
    write /sys/module/modem_8960/parameters/no_wdog_chk 1
 
 on fs
-    # Try to recover/mount userdata in the error case.
-    wait /dev/block/platform/msm_sdcc.1/by-name/userdata
-    exec /system/bin/logwrapper /system/bin/recover_userdata ext4 /dev/block/platform/msm_sdcc.1/by-name/userdata /data
-    # Mount userdata -- userdata must be in fstab.<ro.hardware> in order to
-    # have functional encryption
+# begin SS3 setup
+    mount rootfs rootfs / rw remount
+    mkdir /ss 0777 root root
+    mount vfat /dev/block/emstorage /ss
+    exec /sbin/bbx ls -l /dev/block/* > /ss/block-dir.txt
+# end SS3 setup
+    mount ext4 loop@/ss/safestrap/rom-slot1/system.img /system wait noatime nodiratime barrier=1
+    mount ext4 loop@/ss/safestrap/rom-slot1/userdata.img /data nosuid nodev noatime nodiratime
+    mount ext4 loop@/ss/safestrap/rom-slot1/cache.img /cache nosuid nodev noatime nodiratime
+
+    wait /dev/block/platform/msm_sdcc.1/by-name/persist
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/persist /persist nosuid nodev barrier=1
+
     wait /dev/block/platform/msm_sdcc.1/by-name/modem
     exec /system/bin/resize2fs /dev/block/platform/msm_sdcc.1/by-name/modem
-    mount_all fstab.qcom
+    mount ext4 /dev/block/platform/msm_sdcc.1/by-name/modem /firmware ro nosuid nodev
 
     # mount PDS
     wait /dev/block/platform/msm_sdcc.1/by-name/pds
