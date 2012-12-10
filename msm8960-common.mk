@@ -6,7 +6,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 PRODUCT_COPY_FILES += \
 	device/motorola/msm8960-common/configs/gps.conf:system/etc/gps.conf
 
-
 ## (2) Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/motorola/msm8960-common/msm8960-common-vendor.mk)
 
@@ -28,6 +27,10 @@ PRODUCT_COPY_FILES += \
 	$(COMMON_FOLDER)/audio/audio_effects.conf:system/etc/audio_effects.conf
 
 # SafeStrap files
+PRODUCT_PACKAGES += \
+    init2 \
+    adbd
+
 PRODUCT_COPY_FILES += \
     system/core/rootdir/init.rc:system/etc/rootfs/init.rc \
     system/core/rootdir/ueventd.rc:system/etc/rootfs/ueventd.rc \
@@ -47,6 +50,7 @@ PRODUCT_COPY_FILES += \
 
 # Camera wrapper
 PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
+
 # Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
@@ -93,18 +97,24 @@ PRODUCT_COPY_FILES += \
 # QCOM Display
 PRODUCT_PACKAGES += \
     libgenlock \
-    liboverlay
+    libmemalloc \
+    liboverlay \
+    libqdutils \
+    libtilerenderer \
+    libI420colorconvert
 
 # Omx
 PRODUCT_PACKAGES += \
-    libc2dcolorconvert \
+    libdivxdrmdecrypt \
+    libmm-omxcore \
     libOmxCore \
+    libstagefrighthw \
+    libOmxVdec \
     libOmxVenc \
     libOmxAacEnc \
     libOmxAmrEnc \
     libOmxEvrcEnc \
-    libOmxQcelp13Enc \
-    libstagefrighthw
+    libOmxQcelp13Enc
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -186,8 +196,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/wififirmware/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
     $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_cfg.ini:system/etc/firmware/wlan/prima/WCNSS_qcom_cfg.ini \
-    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin \
-    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_regulatory.bin
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_regulatory.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_regulatory.bin \
+    $(COMMON_FOLDER)/wififirmware/WCNSS_qcom_wlan_nv_calibration.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv_calibration.bin
 
 # Live Wallpapers
 PRODUCT_PACKAGES += \
@@ -284,8 +294,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.mode=endfire \
     persist.audio.vr.enable=false \
-    persist.audio.handset.mic=digital \
-    ro.qc.sdk.audio.fluencetype=fluence \
+    persist.audio.handset.mic=dmic \
     ro.qc.sdk.audio.ssr=false
 
 # Bluetooth

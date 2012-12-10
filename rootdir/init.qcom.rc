@@ -70,9 +70,6 @@ on early-boot
     exec /system/bin/sh /init.qcom.early_boot.sh
     exec /system/bin/sh /init.qcom.syspart_fixup.sh
 
-on early-init
-
-
 on boot
     exec system/bin/btnvtool -O
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -185,6 +182,8 @@ on boot
 on post-fs
 # Service not used
 #    exec export_rc /persist/init.cne.rc
+    insmod /system/lib/modules/cfg80211.ko
+    insmod /system/lib/modules/tcp_westwood.ko
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -222,7 +221,7 @@ on post-fs-data
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
-    symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
+    #symlink /data/misc/wifi/wpa_supplicant /data/system/wpa_supplicant
 
     #Create directories for wiper services
     #mkdir /data/wpstiles/ 0755 shell
