@@ -297,8 +297,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     debug.egl.hw=1 \
     debug.enabletr=0 \
-    debug.composition.type=gpu \
-    debug.mdpcomp.maxlayer=0 \
+    debug.composition.type=dyn \
+    debug.mdpcomp.maxlayer=3 \
     debug.mdpcomp.logs=0
 
 # Audio
@@ -340,4 +340,4 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.root_access=3
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
 $(call inherit-product, frameworks/native/build/phone-xhdpi-1024-dalvik-heap.mk)
-$(call inherit-product-if-exists, vendor/motorola/msm8960-common/jb_caf_adreno.mk)
+$(call inherit-product-if-exists, vendor/motorola/msm8960-common/jb_42_adreno.mk)
