@@ -103,6 +103,8 @@ TARGET_RECOVERY_FSTAB := device/motorola/msm8960-common/recovery.fstab
 
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
+TARGET_QCOM_AUDIO_VARIANT := caf
+TARGET_QCOM_DISPLAY_VARIANT := caf
 
 # Graphics
 USE_OPENGL_RENDERER := true

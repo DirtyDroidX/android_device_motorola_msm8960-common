@@ -203,6 +203,10 @@ PRODUCT_PACKAGES += \
     wiperiface \
     WCNSS_qcom_wlan_nv.bin
 
+# Wifi
+PRODUCT_PACKAGES += \
+    libnetcmdiface
+
 # wifi
 PRODUCT_COPY_FILES += \
     $(COMMON_FOLDER)/wififirmware/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
@@ -298,7 +302,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.egl.hw=1 \
     debug.enabletr=0 \
     debug.composition.type=dyn \
-    debug.mdpcomp.maxlayer=3 \
+    persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0
 
 # Audio

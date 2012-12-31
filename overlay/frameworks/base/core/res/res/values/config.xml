@@ -341,4 +341,6 @@
     <!-- Default interface to monitor data use -->
     <string name="config_datause_iface">rmnet0</string>
 
+    <bool name="config_enableWifiDisplay">true</bool>
+
 </resources>
