@@ -48,6 +48,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.local.rc:system/etc/rootfs/init.cm.rc
 
+# Camera wrapper
+PRODUCT_COPY_FILES += $(COMMON_FOLDER)/configs/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
+
 # Audio
 PRODUCT_PACKAGES += \
     alsa.msm8960 \
@@ -63,12 +66,6 @@ PRODUCT_PACKAGES += tinymix tinycap tinyplay
 # Bluetooth
 PRODUCT_PACKAGES += \
     hci_qcomm_init
-
-# Camera
-PRODUCT_PACKAGES += \
-	camera.msm8960 \
-	libmmcamera_interface2 \
-	libmmcamera_interface
 
 # GPS
 PRODUCT_PACKAGES += \
