@@ -326,8 +326,8 @@
     <string-array name="config_locationProviderPackageNames" translatable="false">
         <!-- The standard AOSP fused location provider -->
         <item>com.android.location.fused</item>
-        <item>com.google.android.location.NetworkLocationProvider</item>
-        <item>com.google.android.location.GeocodeProvider</item>
+        <!-- The Google provider -->
+        <item>com.google.android.location</item>
     </string-array>
 
     <!-- Flag indicating whether we should enable the automatic brightness in Settings.
@@ -342,5 +342,8 @@
     <string name="config_datause_iface">rmnet0</string>
 
     <bool name="config_enableWifiDisplay">true</bool>
+
+    <!-- We dont have different firmware for wifi modes, prevent reloading it -->
+    <bool name="config_wifiApFirmwareReload">false</bool>
 
 </resources>

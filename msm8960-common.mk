@@ -301,7 +301,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.sf.hw=1 \
     debug.egl.hw=1 \
     debug.enabletr=0 \
-    debug.composition.type=dyn \
+    debug.gr.numframebuffers=3 \
+    persist.sys.ui.hw=true \
+    debug.composition.type=c2d \
+    debug.egl.recordable.rgba8888=1 \
     persist.hwc.mdpcomp.enable=true \
     debug.mdpcomp.logs=0
 
