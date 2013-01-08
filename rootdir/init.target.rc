@@ -342,8 +342,8 @@ on post-fs-data
 #start camera server as daemon
 service qcamerasvr /system/bin/logwrapper /system/bin/qcamerasrvwrapper.sh
     class late_start
-    user system
-    group system camera inet
+    user media
+    group system camera inet input graphics
 
 #start GNSS/Sensor interface daemon
 #service gsiff_daemon /system/bin/gsiff_daemon
