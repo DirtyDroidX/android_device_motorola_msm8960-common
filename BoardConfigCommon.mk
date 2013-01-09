@@ -1,3 +1,5 @@
+USE_CAMERA_STUB := true
+
 TARGET_SPECIFIC_HEADER_PATH := device/motorola/msm8960-common/include
 
 BOARD_VENDOR := motorola
