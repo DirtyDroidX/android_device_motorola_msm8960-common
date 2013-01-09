@@ -28,7 +28,7 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 # Kernel
 TARGET_KERNEL_SOURCE        := kernel/motorola/msm8960-common
 TARGET_KERNEL_CONFIG        := msm8960_mmi_defconfig
-BOARD_KERNEL_CMDLINE        := console=/dev/null androidboot.hardware=qcom user_debug=31 loglevel=1 msm_rtb.filter=0x3F kgsl.mmutype=gpumm
+BOARD_KERNEL_CMDLINE        := console=/dev/null androidboot.hardware=qcom user_debug=31 loglevel=1 msm_rtb.filter=0x3F kgsl.mmutype=gpummu zcache
 BOARD_KERNEL_BASE           := 0x80200000
 BOARD_MKBOOTIMG_ARGS        := --ramdisk_offset 0x01600000
 BOARD_KERNEL_PAGESIZE       := 2048
@@ -141,6 +141,7 @@ TW_INTERNAL_STORAGE_PATH := "/data/media"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "data"
 TW_EXTERNAL_STORAGE_PATH := "/external_sd"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-BOARD_HAS_NO_REAL_SDCARD := true
+#BOARD_HAS_NO_REAL_SDCARD := true
 RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_INITRC := device/motorola/msm8960-common/recovery.rc
+TARGET_USERIMAGES_USE_EXT4 := true
