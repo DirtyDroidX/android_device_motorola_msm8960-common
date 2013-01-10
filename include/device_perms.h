@@ -16,6 +16,7 @@
     { "net.dnschange",    AID_VPN,      0 }, \
     { "wifi.",            AID_WIFI,     0 }, \
     { "persist.log.",     AID_SHELL,    AID_LOG }, \
+    { "persist.audio.",   AID_SYSTEM,   0 }, \
     { "tcmd.",            AID_MOT_TCMD, AID_MOT_WHISPER }, \
     { "mot.backup_restore.", AID_MOT_TCMD, 0}, \
     { "bluetooth.",       AID_SYSTEM,    0 }, \
